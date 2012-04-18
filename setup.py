@@ -4,12 +4,10 @@
 from setuptools import setup
 
 setup(
-    name = 'teamcalendar',
-    author = 'Martin Aspeli',
-    author_email = 'optilude@gmail.com',
-    maintainer = 'Chris Nelson',
-    maintainer_email = 'Chris.Nelson@SIXNET.com',
-    description = 'Trac plugin for managing team availability',
+    name = 'EduTracTeamCalendar',
+    author = 'Martin Aspeli, Aleksey A. Porfirov',
+    author_email = 'lexqt@yandex.ru',
+    description = 'EduTrac plugin for managing team availability',
     version = '0.1',
     license='BSD',
     packages=['teamcalendar'],
@@ -20,6 +18,14 @@ setup(
             'teamcalendar = teamcalendar'
         ]
     },
-    install_requires = [
-    ],
 )
+
+#### AUTHORS ####
+## Author of original TeamCalendarPlugin:
+## Martin Aspeli
+## optilude@gmail.com
+##
+## Author of EduTrac adaptation and some fixes and enhancements:
+## Aleksey A. Porfirov
+## lexqt@yandex.ru
+## github: lexqt
