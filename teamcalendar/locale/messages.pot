@@ -1,0 +1,56 @@
+# Translations template for EduTracTeamCalendar.
+# Copyright (C) 2012 ORGANIZATION
+# This file is distributed under the same license as the
+# EduTracTeamCalendar project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: EduTracTeamCalendar 0.2\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2012-04-21 14:00+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: teamcalendar/web_ui.py:52 teamcalendar/templates/teamcalendar.html:13
+#: teamcalendar/templates/teamcalendar.html:19
+msgid "Team Calendar"
+msgstr ""
+
+#: teamcalendar/web_ui.py:127
+msgid "Timetable updated."
+msgstr ""
+
+#: teamcalendar/templates/teamcalendar.html:23
+msgid ""
+"Please indicate your availability by ticking the boxes\n"
+"         under your name, below. To display a different date range,\n"
+"         use the date selectors below."
+msgstr ""
+
+#: teamcalendar/templates/teamcalendar.html:30
+msgid "From:"
+msgstr ""
+
+#: teamcalendar/templates/teamcalendar.html:33
+msgid "To:"
+msgstr ""
+
+#: teamcalendar/templates/teamcalendar.html:36
+msgid "Change"
+msgstr ""
+
+#: teamcalendar/templates/teamcalendar.html:46
+msgid "Date"
+msgstr ""
+
+#: teamcalendar/templates/teamcalendar.html:69
+msgid "Apply changes"
+msgstr ""
+

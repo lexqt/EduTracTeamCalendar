@@ -12,6 +12,8 @@ from trac.web.chrome import INavigationContributor, ITemplateProvider, add_style
 from trac.util.datefmt import parse_date_only
 from trac.project.api import ProjectManagement
 
+from api import TeamCalendarSetupParticipant, _
+
 
 __all__ = ['TeamCalendar']
 
@@ -37,6 +39,7 @@ class TeamCalendar(Component):
                             switcher=True)
 
     def __init__(self):
+        TeamCalendarSetupParticipant(self.env) # init main component
         self.pm = ProjectManagement(self.env)
 
     # INavigationContributor
@@ -47,7 +50,7 @@ class TeamCalendar(Component):
     def get_navigation_items(self, req):
         if 'TEAMCALENDAR_VIEW' in req.perm:
             yield ('mainnav', 'teamcalendar',
-                   tag.a('Team Calendar', href=req.href.teamcalendar()))
+                   tag.a(_('Team Calendar'), href=req.href.teamcalendar()))
 
     # IPermissionRequestor
 
@@ -70,8 +73,9 @@ class TeamCalendar(Component):
     def process_request(self, req):
         req.perm.require('TEAMCALENDAR_VIEW')
         pid = self.pm.get_current_project(req)
-
         syllabus_id = req.data['syllabus_id']
+        self.pm.check_component_enabled(self, syllabus_id=syllabus_id)
+
         work_days = [int(d) for d in self.work_days.syllabus(syllabus_id)]
         weeks_prior = self.weeks_prior.syllabus(syllabus_id)
         weeks_after = self.weeks_after.syllabus(syllabus_id)
@@ -122,7 +126,7 @@ class TeamCalendar(Component):
                 current_date += timedelta(1)
 
             self.update_timetable(tuples, pid, from_date, to_date)
-            data['message'] = 'Timetable updated.'
+            data['message'] = _('Timetable updated.')
 
         # Get the current timetable
         timetable = self.get_timetable(from_date, to_date, people, pid, work_days)
@@ -143,6 +147,7 @@ class TeamCalendar(Component):
 
         add_stylesheet(req, 'teamcalendar/css/calendar.css')
 
+        data['_'] = _
         return 'teamcalendar.html', data, None
 
     def get_timetable(self, from_date, to_date, people, pid, work_days):

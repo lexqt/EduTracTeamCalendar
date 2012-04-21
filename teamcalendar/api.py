@@ -2,16 +2,25 @@ from trac.core import Component, implements
 from trac.env import IEnvironmentSetupParticipant
 from trac.db import DatabaseManager
 
+from trac.util.translation import domain_functions
+
 import db_default
 
 
 __all__ = ['TeamCalendarSetupParticipant']
 
+_, tag_, N_, add_domain = \
+    domain_functions('teamcalendar', ('_', 'tag_', 'N_', 'add_domain'))
 
 
 class TeamCalendarSetupParticipant(Component):
 
     implements(IEnvironmentSetupParticipant)
+
+    def __init__(self):
+        import pkg_resources
+        locale_dir = pkg_resources.resource_filename(__name__, 'locale')
+        add_domain(self.env.path, locale_dir)
 
     # IEnvironmentSetupParticipant
 
