@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EduTracTeamCalendar 0.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-04-21 14:00+0400\n"
+"POT-Creation-Date: 2012-04-21 15:29+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: teamcalendar/web_ui.py:52 teamcalendar/templates/teamcalendar.html:13
+#: teamcalendar/web_ui.py:56 teamcalendar/templates/teamcalendar.html:13
 #: teamcalendar/templates/teamcalendar.html:19
 msgid "Team Calendar"
 msgstr ""
 
-#: teamcalendar/web_ui.py:127
+#: teamcalendar/web_ui.py:97
+msgid "Negative time interval selected. Using default."
+msgstr ""
+
+#: teamcalendar/web_ui.py:100
+#, python-format
+msgid "Too big time interval selected (%(interval)s). Using default."
+msgstr ""
+
+#: teamcalendar/web_ui.py:148
 msgid "Timetable updated."
 msgstr ""
 

@@ -8,8 +8,9 @@ from trac.config import IntOption, ListOption
 from trac.perm import IPermissionRequestor
 from trac.core import Component, implements
 from trac.web import IRequestHandler
-from trac.web.chrome import INavigationContributor, ITemplateProvider, add_stylesheet, add_script
-from trac.util.datefmt import parse_date_only
+from trac.web.chrome import INavigationContributor, ITemplateProvider, add_stylesheet, add_script, \
+                            add_warning
+from trac.util.datefmt import parse_date_only, pretty_timedelta
 from trac.project.api import ProjectManagement
 
 from api import TeamCalendarSetupParticipant, _
@@ -37,6 +38,8 @@ class TeamCalendar(Component):
     work_days = ListOption('team-calendar', 'work_days',
                             doc="Lists days of week that are worked. Defaults to none.  0 is Monday.",
                             switcher=True)
+
+    MAX_INTERVAL = 60
 
     def __init__(self):
         TeamCalendarSetupParticipant(self.env) # init main component
@@ -86,6 +89,22 @@ class TeamCalendar(Component):
         to_date   = req.args.get('to_date', '')
         from_date = from_date and parse_date_only(from_date) or self.find_default_start(weeks_prior)
         to_date   = to_date   and parse_date_only(to_date)   or self.find_default_end(weeks_after)
+
+        # Check time interval
+        force_default = True
+        delta = (to_date - from_date).days
+        if delta < 0:
+            add_warning(req, _('Negative time interval selected. Using default.'))
+        elif delta > self.MAX_INTERVAL:
+            add_warning(req, _('Too big time interval selected (%(interval)s). '
+                               'Using default.', interval=pretty_timedelta(to_date, from_date)))
+        else:
+            force_default = False
+
+        # Reset interval to default
+        if force_default:
+            from_date = self.find_default_start(weeks_prior)
+            to_date   = self.find_default_end(weeks_after)
 
         # Message
         data['message'] = ''
