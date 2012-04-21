@@ -10,6 +10,7 @@ from trac.core import Component, implements
 from trac.web import IRequestHandler
 from trac.web.chrome import INavigationContributor, ITemplateProvider, add_stylesheet, add_script, \
                             add_warning
+from trac.util import to_unicode
 from trac.util.datefmt import parse_date_only, pretty_timedelta
 from trac.project.api import ProjectManagement
 
@@ -155,6 +156,9 @@ class TeamCalendar(Component):
         while current_date <= to_date:
             data['timetable'].append(dict(date=current_date, people=timetable[current_date]))
             current_date += timedelta(1)
+
+        for day in data['timetable']:
+            day['strdate'] = to_unicode(day['date'].strftime('%a %d/%m/%Y'))
 
         add_stylesheet(req, 'common/css/jquery-ui/jquery.ui.core.css')
         add_stylesheet(req, 'common/css/jquery-ui/jquery.ui.datepicker.css')
